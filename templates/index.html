@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS Compatibility Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        textarea {
+            resize: none;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        input[type="file"] {
+            margin-bottom: 15px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #e7f4e4;
+        }
+        .result h2 {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>ATS Compatibility Checker</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="job_description">Job Description:</label>
+            <textarea id="job_description" name="job_description" rows="10" cols="50" required></textarea>
+            
+            <label for="resume">Upload Resume (PDF only):</label>
+            <input type="file" id="resume" name="resume" accept=".pdf" required>
+            
+            <input type="submit" value="Submit">
+        </form>
+
+        {% if score is not none %}
+            <div class="result">
+                <h2>Possible ATS Score: {{ score }}%</h2>
+                <h2>Should Candidate Apply: {{ 'Yes' if apply else 'No' }}</h2>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
